@@ -136,16 +136,17 @@
 
         const Favorites = ({ favorites }) => {
             return (
-            <ul className="favorites">
-                {favorites.map((animal, index) => (
-                    <AnimalItem src={animal} key={`${animal}-${index}`} />
-                ))}
-            </ul>
+                <ul className="favorites">
+                    {favorites.map((animal, index) => (
+                        <AnimalItem src={animal} key={`${animal}-${index}`} />
+                    ))}
+                </ul>
             );
         }
 
 
         function App() {
+
             console.log('**App 실행 **');
 
 
@@ -158,16 +159,16 @@
             const [favorites, setFavorites] = React.useState(() => {
                 console.log('favaorites useState() 실행됨');
                 return jsonLocalStorage.getItem('favorites') || [];
-            }); 
+            });
 
-            const [count, setCount] 
-            = React.useState(() => {
-                console.log('count useState() 실행됨!!');
-                return jsonLocalStorage.getItem('count')
-            }); 
+            const [count, setCount]
+                = React.useState(() => {
+                    console.log('count useState() 실행됨!!');
+                    return jsonLocalStorage.getItem('count') || 1;
+                });
 
             const choiceFavorite = favorites.includes(mainAnimal);
-            
+
 
 
 
@@ -180,7 +181,7 @@
                     localStorage.setItem('count', JSON.stringify(nextCount));
                     console.log('>>>>setCount 실행 종료>>')
                     return nextCount;
-                }); 
+                });
             }
 
             function updateMainAnimal() {
@@ -202,7 +203,7 @@
 
 
 
-            
+
 
             return (
                 <div>
@@ -215,7 +216,7 @@
                         choiceFavorite={choiceFavorite}
                     />
                     <Favorites favorites={favorites} />
-                    
+
 
                 </div>
             );
